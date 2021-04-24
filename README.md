@@ -1,1 +1,1 @@
-go build -o api *.go
+> go build -o api *.go
