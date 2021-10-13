@@ -7,5 +7,6 @@ cpu: true
 ram: true
 disks: true
 networkDevices: true
-networkBandwidth: true
-processes: true
+networkBandwidth: false
+processes: false
+ip: true

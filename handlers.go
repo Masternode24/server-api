@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"net"
 	"net/http"
 )
 
@@ -13,6 +14,7 @@ type data struct {
 	NetworkDevices   []NetworkDevice          `json:"networkDevices"`
 	NetworkBandwidth []NetworkDeviceBandwidth `json:"networkBandwidth"`
 	Processes        []Process                `json:"processes"`
+	Ip               net.IP                   `json:"ip"`
 }
 
 func ignoreFavicon(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +36,7 @@ func checkData(w http.ResponseWriter, r *http.Request) {
 		NetworkBandwidth: CheckNetworkBandwidth(),
 		Disks:            CheckDisks(),
 		Processes:        CheckProcesses(),
+		Ip:               CheckIp(),
 	}
 
 	js, err := json.Marshal(data)
@@ -81,6 +84,7 @@ func init() {
 	http.HandleFunc("/networks", networkIndex)
 	http.HandleFunc("/bandwidth", bandwidthIndex)
 	http.HandleFunc("/processes", processesIndex)
+	http.HandleFunc("/ip", ipIndex)
 }
 
 func moduleServer(w http.ResponseWriter, checker interface{}, module string) {
@@ -126,4 +130,8 @@ func bandwidthIndex(w http.ResponseWriter, r *http.Request) {
 
 func processesIndex(w http.ResponseWriter, r *http.Request) {
 	moduleServer(w, CheckProcesses(), "processes")
+}
+
+func ipIndex(w http.ResponseWriter, r *http.Request) {
+	moduleServer(w, CheckIp(), "ip")
 }

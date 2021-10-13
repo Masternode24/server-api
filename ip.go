@@ -1,13 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 )
 
-// Get preferred outbound ip of this machine
-func GetOutboundIP() net.IP {
+func CheckIp() net.IP {
 	conn, err := net.Dial("udp", "8.8.8.8:80")
 	if err != nil {
 		log.Fatal(err)
@@ -17,9 +15,4 @@ func GetOutboundIP() net.IP {
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 
 	return localAddr.IP
-}
-
-func main() {
-	a := GetOutboundIP()
-	fmt.Println(a)
 }
