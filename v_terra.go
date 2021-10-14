@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func VerTerra() string {
+func VerService() string {
 	command := []string{"version"}
 	out, err := exec.Command("terrad", command...).Output()
 	if err != nil {

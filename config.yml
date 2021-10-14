@@ -10,4 +10,4 @@ networkDevices: true
 networkBandwidth: false
 processes: false
 ip: true
-v_terra: true
+ver: true
