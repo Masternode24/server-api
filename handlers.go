@@ -15,6 +15,7 @@ type data struct {
 	NetworkBandwidth []NetworkDeviceBandwidth `json:"networkBandwidth"`
 	Processes        []Process                `json:"processes"`
 	Ip               net.IP                   `json:"ip"`
+	VerTerra         string                   `json:"ver_terra"`
 }
 
 func ignoreFavicon(w http.ResponseWriter, r *http.Request) {
@@ -85,6 +86,7 @@ func init() {
 	http.HandleFunc("/bandwidth", bandwidthIndex)
 	http.HandleFunc("/processes", processesIndex)
 	http.HandleFunc("/ip", ipIndex)
+	http.HandleFunc("/v_terra", verTerra)
 }
 
 func moduleServer(w http.ResponseWriter, checker interface{}, module string) {
@@ -134,4 +136,8 @@ func processesIndex(w http.ResponseWriter, r *http.Request) {
 
 func ipIndex(w http.ResponseWriter, r *http.Request) {
 	moduleServer(w, CheckIp(), "ip")
+}
+
+func verTerra(w http.ResponseWriter, r *http.Request) {
+	moduleServer(w, VerTerra(), "v_terra")
 }
