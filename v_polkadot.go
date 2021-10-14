@@ -8,7 +8,7 @@ import (
 
 func VerService() string {
 	command := []string{"--version"}
-	out, err := exec.Command("/root/polkadot/./target/release/polkadot", command...).Output()
+	out, err := exec.Command("/root/polkadot/./target/release/polkadot | awk '{print $2}'", command...).Output()
 	if err != nil {
 		fmt.Println("an error has occurred while checking")
 		log.Fatal(err)
