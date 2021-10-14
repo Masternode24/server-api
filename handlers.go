@@ -38,6 +38,7 @@ func checkData(w http.ResponseWriter, r *http.Request) {
 		Disks:            CheckDisks(),
 		Processes:        CheckProcesses(),
 		Ip:               CheckIp(),
+		VerTerra:         VerTerra(),
 	}
 
 	js, err := json.Marshal(data)
