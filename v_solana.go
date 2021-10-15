@@ -1,16 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os/exec"
 )
 
 func VerService() string {
-	command := []string{"version"}
-	out, err := exec.Command("solana", command...).Output()
+	out, err := exec.Command("bash", "-c", "solana version | awk '{print $2}' | tr -d '\n'").Output()
 	if err != nil {
-		fmt.Println("an error has occurred while checking")
 		log.Fatal(err)
 	}
 	verString := string(out[:])
