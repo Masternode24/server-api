@@ -16,6 +16,7 @@ type data struct {
 	Processes        []Process                `json:"processes"`
 	Ip               net.IP                   `json:"ip"`
 	Ver              string                   `json:"ver"`
+	Up               string                   `json:"catching_up"`
 }
 
 func ignoreFavicon(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +40,7 @@ func checkData(w http.ResponseWriter, r *http.Request) {
 		Processes:        CheckProcesses(),
 		Ip:               CheckIp(),
 		Ver:              VerService(),
+		Up:               UpService(),
 	}
 
 	js, err := json.Marshal(data)
@@ -88,6 +90,7 @@ func init() {
 	http.HandleFunc("/processes", processesIndex)
 	http.HandleFunc("/ip", ipIndex)
 	http.HandleFunc("/ver", verService)
+	http.HandleFunc("/catching_up", verService)
 }
 
 func moduleServer(w http.ResponseWriter, checker interface{}, module string) {
@@ -141,4 +144,8 @@ func ipIndex(w http.ResponseWriter, r *http.Request) {
 
 func verService(w http.ResponseWriter, r *http.Request) {
 	moduleServer(w, VerService(), "ver")
+}
+
+func upService(w http.ResponseWriter, r *http.Request) {
+	moduleServer(w, VerService(), "catching_up")
 }

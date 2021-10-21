@@ -11,3 +11,4 @@ networkBandwidth: false
 processes: false
 ip: true
 ver: true
+up: true
