@@ -6,7 +6,7 @@ import (
 )
 
 func UpService() string {
-	out, err := exec.Command("bash", "-c", "terrad status | jq | grep 'catching_up' | awk '{print $2}' | tr -d '\n'").Output()
+	out, err := exec.Command("bash", "-c", "kvcli status | jq . | grep 'catching_up' | awk '{print $2}' | tr -d '\n'").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
